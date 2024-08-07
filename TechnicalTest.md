@@ -71,6 +71,7 @@ for iter in range(len(Markets)):
 Loan To Value (LTV) is a defined as the ratio between the amount loaned to purchase an asset and the full value of said asset. In this case, $$LTV = \frac{Initial Investment Price}{Current Price}$$.  
 Generally speaking, the higher the LTV ratio, the riskier a loan is seen as being as a high LTV ratio implies that there is very little equity contained within the asset itself. 
 
+###### SQL Code:
 ```SQL
 -- Calculate and return LTV for each property/deal
 SELECT PropertyID, DealID, (InvPrice/CurrentPrice) AS LTV
