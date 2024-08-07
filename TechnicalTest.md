@@ -59,7 +59,7 @@ for iter in range(len(Markets)):
 **You have to analyse a European last mile logistics platform. The owner is asking whether they could get more leverage on their debt. Calculate the LTV for the portfolio given, for each of 10 the properties, the following:**
 - **Initial investment price -> InvPrice_1, …, InvPrice_10**
 - **Current price -> CurrentPrice_1, …, CurrentPrice_10**
-**Plus the total initial debt amount -> LoanAmmount**
+**Plus the total initial debt amount -> LoanAmount**
 
 **Tables schema:**  
 - **DealsTable(PropertyId, InvPrice, DealId, DealDate)**
@@ -68,11 +68,33 @@ for iter in range(len(Markets)):
 
 **Write a sql query to calculate the current leverage for the portfolio (LTV). How would you advise the owner?**
 
-Loan To Value (LTV) is a defined as the ratio between the amount loaned to purchase an asset and the full value of said asset. In this case, $LTV = \frac{Initial Investment Price}{Current Price}$. 
+Loan To Value (LTV) is a defined as the ratio between the amount loaned to purchase an asset and the full value of said asset. In this case, $$LTV = \frac{Initial Investment Price}{Current Price}$$.  
+Generally speaking, the higher the LTV ratio, the riskier a loan is seen as being as a high LTV ratio implies that there is very little equity contained within the asset itself. 
 
+```SQL
+-- Calculate and return LTV for each property/deal
+SELECT PropertyID, DealID, (InvPrice/CurrentPrice) AS LTV
+FROM DealsTable
+	JOIN PropertyTable
+		ON DealsTable.PropertyId = PropertyTable.PropertyID
+	JOIN LoanTable
+		ON DealsTable.DealId = LoanTable.LoanId
 
+-- Calculate and return the total initial debt amount
+SELECT SUM(LoanAmmount) AS InitDebt
+FROM LoanTable
+```
 
+## Q3. The TV contest
+**A relevant TV station is going to launch in your country a new TV contest and you need to define some specifics about the functioning. This contest has worked well in other countries for several years and it is likely that it will stay on air for, at least, three years.  
+Each day, five people will compete in two events whose results should be balanced for the final score.  
+The first one consists of answering twenty questions on general knowledge. You will know the number of hits.  
+The other one consists of running a 100m race on one leg. You will know the number of seconds spent for each participant.  
+The best one within the five will go to a final test where they will have the last challenge to receive the prize.  
+What mechanism do you consider most appropriate to select the best contestant from the tests carried out? Justify the answer.**
 
+**In the final phase, the host offers the best contestant the choice between a transparent box A with eight 500 euro notes and an opaque box B that could contain twice or half the money of box A with the same probability.  
+Which box should the contestant choose? Justify the answer.**
 
 
 
