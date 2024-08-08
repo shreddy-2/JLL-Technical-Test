@@ -43,7 +43,7 @@ for market in Markets:
 	south = min(LocalLats) - offset		# Southernmost
 	west = min(LocalLongs) - offset		# Westernmost
 
-	# Append coordinates of bounding box to output array. Starts in North-East corner and moves clockwise
+	# Append coordinates of corners bounding box to output array. Starts in North-East corner and moves clockwise
 	OutputCoordinates.append(((north, east), (north, west), (south, west), (south, east)))
 
 # Output values
