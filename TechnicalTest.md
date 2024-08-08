@@ -68,22 +68,29 @@ for iter in range(len(Markets)):
 
 **Write a sql query to calculate the current leverage for the portfolio (LTV). How would you advise the owner?**
 
-Loan To Value (LTV) is a defined as the ratio between the amount loaned to purchase an asset and the full value of said asset. In this case, $$LTV = \frac{Initial Investment Price}{Current Price}$$.  
-Generally speaking, the higher the LTV ratio, the riskier a loan is seen as being as a high LTV ratio implies that there is very little equity contained within the asset itself. 
+Loan To Value (LTV) is a defined as the ratio between the amount loaned to purchase an asset and the full value of said asset, i.e. $$LTV = \frac{Loan \ Amount}{Price}$$.  
+Generally speaking, the higher the LTV ratio, the riskier a loan is seen as being, as a high LTV ratio implies that there is very little equity contained within the asset itself. Additionally, loan contracts will often stipulate a ceiling on the LTV for a particular asset/portfolio. The borrower will borrow at an LTV somewhat lower than this limit to give themselves a bit of spacae to allow the asset price to fluctuate without breaching the terms of the contract.  
+
+For this particular example, there are two LTV ratios that can be calculated: the LTV at day 1 when the loan was originated, and the LTV at the current time. The LTV ratio is calculated by summing up the total loan amount borrowed for the whole portfolio and dividing it by the total price of the whole portfolio. These two ratios can be compared against each other to advise the owner.  
+
+If the current LTV is lower than the day 1 LTV, the value of the portfolio has increased over time and the owner is in a very good position to raise more leverage. The larger the difference, the more new capital the owner can comfortably raise. However, if the current LTV is higher than the investment LTV, the value of the portfolio has decreased somewhat. In this case, it is less advisable to get more leverage but not impossible. If there has only been a small drop in value, and the current LTV is significantly below the contractual limit (if they have one), it would still be possible for the owner to raise more capital. But, the larger the change in LTV, and the closer the current LTV is to the contractual limit, the less advisable it is to try and leverage up.
 
 ###### SQL Code:
 ```SQL
--- Calculate and return LTV for each property/deal
-SELECT PropertyID, DealID, (InvPrice/CurrentPrice) AS LTV
+-- Calculate initial LTV at investment
+-- Sum over all loan amounts and divide by the sum over all initial investment prices
+SELECT (SUM(LoanAmmount) / SUM(InvPrice)) AS InvLTV
+FROM DealsTable
+	JOIN LoanTable
+		ON DealsTable.DealID = LoanTable.DealID;
+
+-- Calculate current LTV in a similar manner
+SELECT (SUM(LoanAmmount) / SUM(CurrentPrice)) AS CurrentLTV
 FROM DealsTable
 	JOIN PropertyTable
-		ON DealsTable.PropertyId = PropertyTable.PropertyID
+		ON DealsTable.PropertyID = PropertyTable.PropertyID
 	JOIN LoanTable
-		ON DealsTable.DealId = LoanTable.LoanId
-
--- Calculate and return the total initial debt amount
-SELECT SUM(LoanAmmount) AS InitDebt
-FROM LoanTable
+		ON DealsTable.DealID = LoanTable.DealID;
 ```
 
 ## Q3. The TV contest
@@ -97,7 +104,7 @@ What mechanism do you consider most appropriate to select the best contestant fr
 **In the final phase, the host offers the best contestant the choice between a transparent box A with eight 500 euro notes and an opaque box B that could contain twice or half the money of box A with the same probability.  
 Which box should the contestant choose? Justify the answer.**
 
-
+The difficulty in creating a fair selection criterion 
 
 
 
