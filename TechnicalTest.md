@@ -101,12 +101,18 @@ The other one consists of running a 100m race on one leg. You will know the numb
 The best one within the five will go to a final test where they will have the last challenge to receive the prize.  
 What mechanism do you consider most appropriate to select the best contestant from the tests carried out? Justify the answer.**
 
+The difficulty in creating a fair selection criterion comes from the fact that the two contests are scored in a fundamentally different manner. The first event, the quiz, is scored using an integer that sits between 0 and 20 representing the number of correctly answered questions. This means that an individual contestant's score can be reduced down to a single percentage value that can easily be compared against the score of any other contestant. However, since there are only 20 possible scores, there is a non-negligable chance of multiple contestant achieving the same score. Which poses a problem for selecting a single individual as the winner. The most simple interpretation is to rank contestants by their score (high to low). Without additional information, it is not possible to differentiate between contestants who achieve the same score.
+
+The race on the other hand is scored (theoretically) over the entire set of positive reals. There is no maximum time so it is not possible to calculate a percentage score for each contestant. However, there is a very low chance that two contents achieve the exact same time, it is simple to assume that this probability is effectively zero (not a bad assumption if race times are recorded to high degree of precision). This makes it easy to rank all the contestants by time (low to high). The best contestant is simply the contestant with the lowest time.
+
+There are an enourmous number of possible scoring mechanisms but one that particularly appeals to me is to subtract a contestant's quiz score from their race time. Every contestant will compete in the quiz and recieve a score between 0 and 20. The contestants will then run the race and recieve their race time. Then, each person's quiz score (potentially multiplied by a scaling factor that can be varied to control the balance between the two contests) is subtract from their race time to give a final contest time. As in a regular race, the contestant with the smallest time wins.
+
+The main benefit of this system is that both contests are important and a contestant can try to compensate for a bad performance in one game with a good performance in the other. But, in order to win overall a contestant has to do very well in both games. If a contestant does badly in one game, they still have a chance of doing well by excelling at the other game. This avoids a situation where a contestant fails at one game and then completely gives up on the other. It makes better TV!
+
 **In the final phase, the host offers the best contestant the choice between a transparent box A with eight 500 euro notes and an opaque box B that could contain twice or half the money of box A with the same probability.  
 Which box should the contestant choose? Justify the answer.**
 
-The difficulty in creating a fair selection criterion 
-
-
+The expected value of box A is $1.0 * 8 * 500€ = 4000€$ and the expected value of box B is $0.5 * 16 * 500€ + 0.5 * 4 * 500€ = 5000€$. So, statistically, it is better to select box B as it is 25% more valuable. However, if the contestant is very risk adverse and really wants to earn more than 2000€ they can choose box A and earn 4000€ for certain, as long as they are happy missing out on the chance to earn 8000€.
 
 
 
