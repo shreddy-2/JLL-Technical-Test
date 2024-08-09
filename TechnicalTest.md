@@ -62,9 +62,9 @@ for iter in range(len(Markets)):
 **Plus the total initial debt amount -> LoanAmount**
 
 **Tables schema:**  
-- **DealsTable(PropertyId, InvPrice, DealId, DealDate)**
-- **PropertyTable(PropertyId, CurrentPrice)** 
-- **LoanTable(DealId, LoanId, LoanAmmount)**
+> **DealsTable(PropertyId, InvPrice, DealId, DealDate)**  
+> **PropertyTable(PropertyId, CurrentPrice)**   
+> **LoanTable(DealId, LoanId, LoanAmmount)**  
 
 **Write a sql query to calculate the current leverage for the portfolio (LTV). How would you advise the owner?**
 
